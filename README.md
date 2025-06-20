@@ -1,7 +1,7 @@
 # Project 3: Spots
 
 Please see the link to my project that has been created for the Project 3: Spots. 
-https://github.com/rcabrera0513/se_project_spots.git
+- Webpage Link: https://rcabrera0513.github.io/se_project_spots/
 
 ## Description 
 

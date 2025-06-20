@@ -1,0 +1,29 @@
+.cards {
+    padding-top: 20px;
+}
+
+.cards__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 413px);
+    justify-content: center;
+    gap: 40px 20px;
+}
+
+@media screen and (max-width: 627px) {
+    .cards {
+        width: 288px;
+        height: 288px;
+    }
+
+    .cards__list {
+        grid-auto-flow: vertical;
+        width: 288px;
+        height: 28px;
+        border-bottom: 1px;
+        padding-bottom: 20px;
+        gap: 20px;
+    }
+}

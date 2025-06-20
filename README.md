@@ -1,21 +1,19 @@
 # Project 3: Spots
 
-### Overview  
+Please see the link to my project that has been created for the Project 3: Spots. 
+https://github.com/rcabrera0513/se_project_spots.git
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+## Description 
+
+The project has been created based on Figma of Bessie Coleman which includes six different images of beautiful scenary. Each photo does include different titles, and like buttons for the ability to like whichever is loved most. The project also allows you to view it in a Desktop Version, Tablet and smart phone thru the web. 
+
+## Tech Stack
+
+-HTML
+-CSS
+-Responsive Design
+
+## Deployment
+
+This webpage is deployed to GitHub Pages. You may visit my GitHub via the link below. 
+-Deployment Link: https://github.com/rcabrera0513?tab=repositories

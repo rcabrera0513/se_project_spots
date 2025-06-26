@@ -8,6 +8,7 @@
     width: 190px;
     margin-right: 20px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .profile__column {
@@ -18,49 +19,71 @@
 .profile__name {
     margin: 0 0 12px;
     font-weight: 500;
-    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-family: "Poppins";
     font-size: 32px;
     line-height: 24px;
     letter-spacing: 0;
-    -webkit-box-orient: vertical;
     max-width: 428px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-width: 1200px;
 }
 
 .profile__description {
     margin: 0;
-    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-family: "Poppins";
     font-weight: 500; 
     line-height: 24px;
     letter-spacing: 0;
     -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    max-width: 1300px;
 }
 
 .profile__edit-btn {
-    margin-top: 120px;
-    justify-content: space-between;
-    height: 16px;
+    margin: 120px 20px 0 0;
     font-weight: 500;
     font-size: 16px;
+    color: #212121;
     opacity: 70%;
     border: none;
-    font-family: "Poppins", Arial, sans-serif;
+    font-family: "Poppins";
     background-color: transparent;
     display: flex;
+    gap: 8px;
+    padding: 0;
+}
+
+.profile__edit-btn:hover {
+    background-color: black;
 }
 
 .profile__add-btn {
-    margin-left: 700px;
+    margin-left: auto;
     margin-top: auto;
-    width: 149px;
-    height: 52px;
+    border: 2px;
     border-radius: 8px;
-    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-family: "Poppins";
     color: #fff;
     background-color: black;
-    justify-content: space-between;
     font-size: 16px;
-    letter-spacing: 0%;
     font-weight: 500;
+    cursor: pointer;
+    border: none;
+    padding: 18px 32px 18px 32px;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile__add-btn:hover {
+    background-color: black;
 }
 
 @media screen and (max-wdith: 627px) {

@@ -19,7 +19,7 @@
 .profile__name {
     margin: 0 0 12px;
     font-weight: 500;
-    font-family: "Poppins";
+    font-family: "Poppins", Arial, sans-serif;
     font-size: 32px;
     line-height: 24px;
     letter-spacing: 0;
@@ -34,7 +34,7 @@
 
 .profile__description {
     margin: 0;
-    font-family: "Poppins";
+    font-family: "Poppins", Arial, sans-serif;
     font-weight: 500; 
     line-height: 24px;
     letter-spacing: 0;
@@ -44,16 +44,17 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     max-width: 1300px;
+    opacity: 0.7;
 }
 
 .profile__edit-btn {
-    margin: 120px 20px 0 0;
+    margin-top: auto;
     font-weight: 500;
     font-size: 16px;
     color: #212121;
     opacity: 70%;
     border: none;
-    font-family: "Poppins";
+    font-family: "Poppins", Arial, sans-serif;
     background-color: transparent;
     display: flex;
     gap: 8px;
@@ -61,7 +62,7 @@
 }
 
 .profile__edit-btn:hover {
-    background-color: black;
+    opacity: 1;
 }
 
 .profile__add-btn {
@@ -69,9 +70,9 @@
     margin-top: auto;
     border: 2px;
     border-radius: 8px;
-    font-family: "Poppins";
+    font-family: "Poppins", Arial, sans-serif;
     color: #fff;
-    background-color: black;
+    background-color: #212121;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
@@ -79,11 +80,13 @@
     padding: 18px 32px 18px 32px;
     gap: 8px;
     align-items: center;
-    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile__add-btn:hover {
-    background-color: black;
+    opacity: 0.8;
 }
 
 @media screen and (max-wdith: 627px) {

@@ -31,11 +31,11 @@
 }
 
 .card__like-btn:hover {
-    background-color: black;
+    opacity: 1;
 }
 
 .card__title {
-    margin: auto;
+    margin: 0;
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
@@ -52,7 +52,6 @@
     }
 
     .card__title {
-        font-family: "Poppins";
         font-size: 16px;
         max-width: 250px;
     }

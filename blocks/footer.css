@@ -1,0 +1,20 @@
+.footer {
+    background-color: #fff;
+    color: #212121;
+    font-size: 8px;
+    text-decoration: none;
+    background-color: #fcf5e5;
+    border-top: 1px rgba(33, 33, 33, 0.4) solid;
+    padding: 60px 0;
+}
+
+.footer__copyright {
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 16px;
+    opacity: 70%;
+    line-height: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}

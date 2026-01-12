@@ -1,0 +1,147 @@
+.modal {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s ease-in;
+}
+
+.modal_is-opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal__container {
+  max-width: 703px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 32px 50px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.modal__close-btn {
+  position: absolute;
+  top: 32px;
+  right: 50px;
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+  color: rgba(33, 33, 33, 1);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  background-image: url(../images/X-Btn.svg);
+}
+
+.modal__close-btn:hover {
+  background-color: transparent;
+}
+
+.modal__title {
+  margin: 0 0 32px;
+  letter-spacing: 0;
+  font-size: 32px;
+  font-weight: 16px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__label {
+  margin: 0 0 32px;
+  font-size: 16px;
+}
+
+.modal__input {
+  display: block;
+  width: 100%;
+  margin: 8px 0 0;
+  border: 1px solid rgba(33, 33, 33, 0.4);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 16px 12px;
+  box-sizing: border-box;
+}
+
+.modal__input:hover {
+  border: 1px solid rgba(33, 33, 33, 1);
+}
+
+.modal__input::placeholder {
+  color: rgba(33, 33, 33, 0.4);
+  padding: 16px 12px 16px 12px;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+.modal__submit-btn {
+  background-color: rgba(33, 33, 33, 1);
+  color: #fff;
+  max-width: 156px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 18px 32px 18px 32px;
+  font-family: "Poppins", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.modal__submit-btn:hover {
+  background-color: #555;
+}
+
+@media screen and (max-width: 627px) {
+  .modal {
+    flex-direction: column;
+    align-items: center;
+    scroll-behavior: auto;
+    padding: 12px;
+  }
+
+  .modal__close-btn {
+    top: 12px;
+    right: 12px;
+  }
+
+  .modal__label {
+    margin: 0 0 24px;
+  }
+
+  .modal__input {
+    justify-content: space-between;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .modal__container {
+    padding: 22px 12px 12px;
+  }
+
+  .modal__title {
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: rgba(33, 33, 33, 1);
+  }
+
+  .modal__submit-btn {
+    max-width: none;
+    width: 100%;
+  }
+}

@@ -17,8 +17,3 @@ The project has been created based on Figma of Bessie Coleman which includes six
 
 This webpage is deployed to GitHub Pages. You may visit my GitHub via the link below. 
 -Deployment Link: https://github.com/rcabrera0513?tab=repositories
-
-## Video Description of Project Spots 
-
-Here is the link to my video briefly explaining my project including summary of codes, what codes were used and why. 
-https://github.com/rcabrera0513/se_project_spots/blob/fc151fec2aaa6631ddf2fedad90290e194397f9e/spots_project-video.mp4

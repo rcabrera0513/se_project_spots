@@ -44,12 +44,13 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
-  background-image: url(../images/X-Btn.svg);
+  background-image: url(../images/X-Btn-Fade.svg);
 }
 
-.modal__close_type_preview {
-  top: -48px;
-  right: -0;
+.modal__close-btn_type_preview {
+  top: 0;
+  right: -48px;
+  background-image: url(../images/x-icon.svg);
 }
 
 .modal__close-btn:hover {
@@ -61,7 +62,7 @@
   margin: 0 0 32px;
   letter-spacing: 0;
   font-size: 32px;
-  font-weight: 16px;
+  font-weight: 500;
 }
 
 .modal__form {
@@ -72,6 +73,7 @@
 .modal__label {
   margin: 0 0 32px;
   font-size: 16px;
+  display: block;
 }
 
 .modal__input {
@@ -84,10 +86,25 @@
   font-size: 16px;
   padding: 16px 12px;
   box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.modal__input_type_error {
+  border: 1px solid red;
 }
 
 .modal__input:hover {
   border: 1px solid rgba(33, 33, 33, 1);
+}
+
+.modal__error {
+  display: block;
+  color: red;
+  margin-top: 8px;
+}
+
+.modal__error_visible { 
+  visibility: visible; 
 }
 
 .modal__input::placeholder {
@@ -106,7 +123,6 @@
   font-family: "Poppins", Arial, sans-serif;
   font-weight: 500;
   font-size: 16px;
-  align-items: center;
   gap: 8px;
   cursor: pointer;
   border: none;
@@ -114,6 +130,12 @@
 
 .modal__submit-btn:hover {
   background-color: #555;
+}
+
+.modal__submit-btn:disabled {
+  background-color: grey;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .modal__image-container {
@@ -132,26 +154,29 @@
 .modal__caption {
   background-color: #212121; 
   color: white;
-  padding: 4px 8px 4px 8px;
-  border-radius: 8px;
-  top: 750px;
-  left: 223px;
-  width: 198px;
-  height: 24px;
+  padding: 4px 8px;
+  position: absolute; 
+  left: 0; 
+  top: calc(100% + 10px);
   letter-spacing: 0;
   line-height: 120%;
   font-size: 20px;
   font-family: "Poppins";
   font-weight: 500;
-  font-style: medium;
+  max-width: 100%;
+  border-radius: 8px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 320px) {
   .modal {
     flex-direction: column;
     align-items: center;
     scroll-behavior: auto;
     padding: 12px;
+  }
+
+  .modal__caption {
+    font-size: 16px;
   }
 
   .modal__close-btn {
@@ -187,11 +212,11 @@
 }
 
 @media screen and (max-width: 627px) {
-  .modal__close_type_preview {
+  .modal__close-btn_type_preview {
     top: -48px;
     right: 0;
-  }}
+  }
 
   .modal__image {
-    max-width: unset;
+    max-width: 90vw;
   }

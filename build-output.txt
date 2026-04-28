@@ -1,0 +1,4 @@
+
+> Insert project name@0.1.0 build
+> webpack --mode production
+

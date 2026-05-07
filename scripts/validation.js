@@ -13,7 +13,7 @@ const showInputError = (formEl, inputEl, errorMsg) => {
   inputEl.classList.add(settings.inputErrorClass);
 };
 
-export const hideInputError = (formEl, inputEl, errorMsg) => {
+export const hideInputError = (formEl, inputEl) => {
   const errorMsgEl = formEl.querySelector(`#${inputEl.id}-error`);
   errorMsgEl.textContent = "";
   inputEl.classList.remove(settings.inputErrorClass);
@@ -23,7 +23,7 @@ const checkInputValidity = (formEl, inputEl) => {
   if (!inputEl.validity.valid) {
     showInputError(formEl, inputEl, inputEl.validationMessage);
   } else {
-    hideInputError(formEl, inputEl, "");
+    hideInputError(formEl, inputEl);
   }
 };
 
@@ -52,12 +52,12 @@ const setEventListeners = (formEl, config) => {
   const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
   const submitButton = formEl.querySelector(config.submitButtonSelector);
 
-  toggleButtonState(inputList, submitButton, config);
+  toggleButtonState(inputList, submitButton);
 
   inputList.forEach((inputEl) => {
     inputEl.addEventListener("input", function () {
-      checkInputValidity(formEl, inputEl, config);
-      toggleButtonState(inputList, submitButton, config);
+      checkInputValidity(formEl, inputEl);
+      toggleButtonState(inputList, submitButton);
     });
   });
 };

@@ -21,24 +21,24 @@
       <main class="content">
         <section class="profile page__section">
           <div class="profile__avatar-container">
-          <button class="profile__avatar-btn">
+            <button class="profile__avatar-btn">
+              <img
+                src="./images/pencil edit profile.svg"
+                alt="Pencil icon"
+                class="profile__pencil-icon"
+              />
+            </button>
             <img
-          src="./images/secondary-btn.svg"
-          alt="Pencil icon"
-          class="profile__pencil-icon"
-        />
-          </button>
-          <img
-            src="./images/avatar.jpg"
-            alt="Bessie Coleman"
-            class="profile__avatar"
-          />
+              src="./images/avatar.jpg"
+              alt="Bessie Coleman"
+              class="profile__avatar"
+            />
           </div>
           <div class="profile__column">
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
             <button type="button" class="profile__edit-btn">
-              <img src="./images/group-2.svg" alt="Pencil icon" />Edit Profile
+              <img src="./images/Edit Profile.svg" alt="Edit Profile" />
             </button>
           </div>
           <button type="button" class="profile__new-post-btn">
@@ -50,16 +50,16 @@
             <template id="card-template">
               <li class="card">
                 <button class="card__delete-btn" type="button"></button>
-              <img
-                src="#"
-                alt=""
-                class="card__image"
-              />
-              <div class="card__content">
-                <h2 class="card__title"></h2>
-                <button type="button" class="card__like-btn"></button>
-              </div>
-            </li>
+                <img
+                  src="#"
+                  alt=""
+                  class="card__image"
+                />
+                <div class="card__content">
+                  <h2 class="card__title"></h2>
+                  <button type="button" class="card__like-btn"></button>
+                </div>
+              </li>
             </template>
           </ul>
         </section>
@@ -118,7 +118,7 @@
               />
               <span id="card-image-input-error" class="modal__error"></span>
             </label>
-            <label class="modal__label" for="card-caption-input" >
+            <label for="card-caption-input" class="modal__label">
               Caption
               <input
                 id="card-caption-input"
@@ -135,22 +135,19 @@
           </form>
         </div>
       </div>
-    </div>
-
-    <div class="modal modal_type_preview" id="preview-modal">
+      <div class="modal modal_type_preview" id="preview-modal">
         <div class="modal__image-container">
           <button 
             type="button" 
             class="modal__close-btn modal__close-btn_type_preview">
           </button>
-            <img 
-              src="#" 
-              alt="" 
-              class="modal__image"/>
+          <img 
+            src="#" 
+            alt="" 
+            class="modal__image"/>
           <h2 class="modal__caption"></h2>
         </div>
       </div>
-
       <div class="modal" id="avatar-modal">
         <div class="modal__container">
           <button type="button" class="modal__close-btn"></button>
@@ -173,8 +170,7 @@
           </form>
         </div>
       </div>
-
-      <div class="modal modal _is-opened" id="delete-modal">
+      <div class="modal" id="delete-modal">
         <div class="modal__container">
           <button type="button" class="modal__close-btn"></button>
           <h3 class="modal__title">Are you sure you want to delete this post?</h3>

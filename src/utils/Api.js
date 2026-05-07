@@ -10,7 +10,7 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Error: ${res.status}`);
+    throw new Error(`Error: ${res.status}`);
   }
 
   getUserInfo() {
@@ -47,6 +47,20 @@ class Api {
 
   deleteCard(cardId) {
     return fetch(`${this._baseURL}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  likeCard(cardId) {
+    return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  unlikeCard(cardId) {
+    return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponse);

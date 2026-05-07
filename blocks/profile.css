@@ -3,37 +3,12 @@
   padding: 34px 0 20px;
   border-bottom: 1px rgba(33, 33, 33, 0.4) solid;
 }
-
-.profile__avatar-container {
-  position: relative;
-}
-
-.profile__avatar-btn {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  visibility: hidden;
-
-}
-
-.profile__avatar-container:hover .profile__avatar-btn {
-  visibility: visible;
-  opacity: 0.5;
-}
-
 .profile__avatar {
   height: 190px;
   width: 190px;
   margin-right: 20px;
   border-radius: 8px;
   object-fit: cover;
-}
-
-.profile__avatar-btn::after {
-  content: "Edit Avatar";
 }
 
 .profile__column {
@@ -48,11 +23,11 @@
   font-size: 32px;
   line-height: 1;
   letter-spacing: 0;
+  max-width: 428px;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  line-clamp: 3;
   -webkit-box-orient: vertical;
   max-width: 420px;
 }
@@ -69,7 +44,6 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  line-clamp: 3;
   max-width: 420px;
   opacity: 0.7;
 }
@@ -79,7 +53,7 @@
   font-weight: 500;
   font-size: 16px;
   color: #212121;
-  opacity: 0.7;
+  opacity: 70%;
   border: none;
   font-family: "Poppins", Arial, sans-serif;
   background-color: transparent;
@@ -96,7 +70,7 @@
 .profile__new-post-btn {
   margin-left: auto;
   margin-top: auto;
-  border: none;
+  border: 2px;
   border-radius: 8px;
   font-family: "Poppins", Arial, sans-serif;
   color: #fcf5e5;
@@ -110,9 +84,10 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.profile__new-post-btn:hover {
+.profile__add-btn:hover {
   opacity: 0.8;
 }
 
@@ -135,14 +110,6 @@
     height: 80px;
     width: 80px;
   }
-
-  .profile__avatar-btn {
-    visibility: visible;
-  }
-
-  .profile__avatar-btn::after {
-    content: "";
-}
 
   .profile__name {
     font-size: 20px;

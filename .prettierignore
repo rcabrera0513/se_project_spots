@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 vendor/normalize.css
 {
   "tabWidth": 2,
   "useTabs": false,
   "endOfLine": "lf"
 }
+=======
+vendor/normalize.css
+>>>>>>> 4d4a68bdb5a0c8432d49509d5f0bb16011c71c76

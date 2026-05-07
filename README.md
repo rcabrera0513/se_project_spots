@@ -17,8 +17,11 @@ The project has been created based on Figma of Bessie Coleman which includes six
 
 This webpage is deployed to GitHub Pages. You may visit my GitHub via the link below. 
 -Deployment Link: https://github.com/rcabrera0513?tab=repositories
+<<<<<<< HEAD
 
 ## Project Pitch Video
  
  Check out [Spots Stage 9](https://drive.google.com/file/d/1uDpdUj8jLBagIylglFV2oRUYCIXxPjm0/view?usp=sharingNK_HERE), where I describe my 
  project and some challenges I faced while building it.
+=======
+>>>>>>> 4d4a68bdb5a0c8432d49509d5f0bb16011c71c76

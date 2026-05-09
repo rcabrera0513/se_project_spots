@@ -51,7 +51,7 @@ class Api {
       headers: this._headers,
     }).then(this._checkResponse);
   }
-
+  
   likeCard(cardId) {
     return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: "PUT",

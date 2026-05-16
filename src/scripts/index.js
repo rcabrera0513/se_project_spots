@@ -1,5 +1,4 @@
-import "./index.css";
-import { enableValidation, settings, hideInputError, toggleButtonState } from "../../scripts/validation.js";
+import "../pages/index.css";
 import Api from "../utils/Api.js";
 
 const api = new Api({

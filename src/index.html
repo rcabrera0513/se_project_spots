@@ -6,7 +6,6 @@
     <meta name="description" content="Coffee Shop Landing Page" />
     <meta name="author" content="Rueben Cabrera" />
     <meta name="keywords" content="HTML, CSS" />
-    <link rel="stylesheet" href="pages/index.css" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <title>Spots</title>
   </head>
@@ -14,27 +13,36 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/Logo-Spots.svg"
+          src="<%=require('./images/Logo-Spots.svg')%>"
           alt="Spot logo"
           class="header__logo"
         />
       </header>
       <main class="content">
         <section class="profile page__section">
+          <div class="profile__avatar-container">
+          <button class="profile__avatar-btn">
+            <img
+          src="<%=require('./images/secondary-btn.svg')%>"
+          alt="Pencil icon"
+          class="profile__pencil-icon"
+        />
+          </button>
           <img
-            src="./images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
             alt="Bessie Coleman"
             class="profile__avatar"
           />
+          </div>
           <div class="profile__column">
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
             <button type="button" class="profile__edit-btn">
-              <img src="./images/group-2.svg" alt="Pencil icon" />Edit Profile
+              <img src="<%=require('./images/group-2.svg')%>" alt="Pencil icon" />Edit Profile
             </button>
           </div>
           <button type="button" class="profile__new-post-btn">
-            <img src="./images/Plus-icon.svg" alt="Plus icon" />New Post
+            <img src="<%=require('./images/Plus-icon.svg')%>" alt="Plus icon" />New Post
           </button>
         </section>
         <section class="cards page__section">
@@ -71,7 +79,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Type your name"
+                minlength="2"
+                maxlength="40"
+                required
               />
+              <span id="profile-name-input-error" class="modal__error"></span>
             </label>
             <label for="profile-description-input" class="modal__label">
               Description
@@ -80,7 +92,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Describe yourself"
+                minlength="2"
+                maxlength="200"
+                required
               />
+              <span id="profile-description-input-error" class="modal__error"></span>
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
@@ -98,16 +114,22 @@
                 type="url"
                 class="modal__input"
                 placeholder="Place a link to the picture"
+                required
               />
+              <span id="card-image-input-error" class="modal__error"></span>
             </label>
-            <label for="card-caption-input" class="modal__label">
+            <label class="modal__label" for="card-caption-input" >
               Caption
               <input
                 id="card-caption-input"
                 type="text"
                 class="modal__input"
                 placeholder="Type your caption"
+                minlength="2"
+                maxlength="30"
+                required
               />
+              <span id="card-caption-input-error" class="modal__error"></span>
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
@@ -119,7 +141,7 @@
         <div class="modal__image-container">
           <button 
             type="button" 
-            class="modal__close-btn modal__close_type_preview">
+            class="modal__close-btn modal__close-btn_type_preview">
           </button>
             <img 
               src="#" 
@@ -128,8 +150,26 @@
           <h2 class="modal__caption"></h2>
         </div>
       </div>
-    </div>
 
-    <script src="./scripts/index.js"></script>
+      <div class="modal" id="avatar-modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn"></button>
+          <h2 class="modal__title">Edit avatar</h2>
+          <form class="modal__form">
+            <label for="profile-avatar-input" class="modal__label"> 
+              Avatar
+              <input
+                id="profile-avatar-input"
+                type="url"
+                class="modal__input"
+                placeholder="Type the URL of your avatar"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span id="profile-avatar-input-error" class="modal__error"></span>
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
   </body>
 </html>

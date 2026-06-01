@@ -1,0 +1,101 @@
+.card {
+  max-width: 413px;
+  position: relative;
+}
+
+.card__image {
+  height: 413px;
+  width: 413px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.card__image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
+}
+
+.card__content {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__delete-btn {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-image: url("../images/State=Delete.svg");
+  border: none;
+  background-color: transparent;
+  opacity: 1;
+  cursor: pointer;
+  background-repeat: no-repeat;
+}
+
+.card__delete-btn:hover {
+  background-image: url("../images/State=Hover.svg");
+  opacity: 1;
+}
+
+.card__like-btn {
+  background-image: url("../images/like-icon-dark.svg");
+  width: 23px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  opacity: 0.4;
+  cursor: pointer;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card__like-btn:hover {
+  opacity: 1;
+}
+
+.card__like-btn_active {
+  background-image: url("../images/Union.svg");
+  opacity: 1;
+}
+
+.card__like-btn_active:hover {
+  opacity: 0.4;
+}
+
+.card__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 350px;
+}
+
+@media screen and (max-width: 627px) {
+  .card__image {
+    width: 288px;
+    height: 288px;
+  }
+
+  .card__title {
+    font-size: 16px;
+    max-width: 250px;
+  }
+
+  .card__like-btn {
+    width: 20px;
+    height: 18px;
+  }
+}

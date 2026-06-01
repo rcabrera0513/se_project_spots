@@ -68,3 +68,5 @@ const setEventListeners = (formEl, config) => {
     setEventListeners(formEl, config);
   });
 };
+
+export { hideInputError, toggleButtonState };

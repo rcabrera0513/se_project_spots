@@ -19,18 +19,26 @@ module.exports = {
   devServer: {
     static: path.resolve(__dirname, "./dist"),
     compress: true,
-    port: 8080,
+    port: 3001,
     open: true,
     liveReload: true,
     hot: false,
   },
   target: ["web", "es5"],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src/index.html"),
+      filename: "index.html",
+    }),
+  ],
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: "babel-loader",
-        exclude: "/node_modules/",
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,

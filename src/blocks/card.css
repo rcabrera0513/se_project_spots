@@ -15,9 +15,9 @@
     box-shadow 0.15s ease;
 }
 
-.cardimage:hover {
+.card__image:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
 }
 
 .card__content {
@@ -33,7 +33,7 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-image: url(../images/State=Delete.svg);
+  background-image: url("../images/State=Delete.svg");
   border: none;
   background-color: transparent;
   opacity: 1;
@@ -42,12 +42,12 @@
 }
 
 .card__delete-btn:hover {
-  background-image: url(../images/State=Hover.svg);
+  background-image: url("../images/State=Hover.svg");
   opacity: 1;
 }
 
 .card__like-btn {
-  background-image: url(../images/like-icon-dark.svg);
+  background-image: url("../images/like-icon-dark.svg");
   width: 23px;
   height: 20px;
   border: none;
@@ -64,7 +64,7 @@
 }
 
 .card__like-btn_active {
-  background-image: url(../images/Union.svg);
+  background-image: url("../images/Union.svg");
   opacity: 1;
 }
 

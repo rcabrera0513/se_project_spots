@@ -2,12 +2,18 @@
     font-family: "Poppins";
     font-style: normal;
     font-weight: 400;
-    src: url("./fonts/Poppins-Regular.ttf") format("truetype");
+    font-display: swap;
+    src: url("./fonts/Poppins-Regular.woff2") format("woff2"),
+         url("./fonts/Poppins-Regular.woff") format("woff"),
+         url("./fonts/Poppins-Regular.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
-    src: url("./fonts/Poppins-Medium.ttf") format("truetype");
+    font-display: swap;
+    src: url("./fonts/Poppins-Medium.woff2") format("woff2"),
+         url("./fonts/Poppins-Medium.woff") format("woff"),
+         url("./fonts/Poppins-Medium.ttf") format("truetype");
 }

@@ -13,7 +13,7 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/Logo-Spots.svg"
+          src="<%=require('./images/Logo-Spots.svg')%>"
           alt="Spot logo"
           class="header__logo"
         />
@@ -23,13 +23,13 @@
           <div class="profile__avatar-container">
           <button class="profile__avatar-btn">
             <img
-          src="./scripts/images/secondary-btn.svg"
+          src="<%=require('./images/secondary-btn.svg')%>"
           alt="Pencil icon"
           class="profile__pencil-icon"
         />
           </button>
           <img
-            src="./images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
             alt="Bessie Coleman"
             class="profile__avatar"
           />
@@ -38,11 +38,11 @@
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
             <button type="button" class="profile__edit-btn">
-              <img src="./images/group-2.svg" alt="Pencil icon" />Edit Profile
+              <img src="<%=require('./images/group-2.svg')%>" alt="Pencil icon" />Edit Profile
             </button>
           </div>
           <button type="button" class="profile__new-post-btn">
-            <img src="./images/Plus-icon.svg" alt="Plus icon" />New Post
+            <img src="<%=require('./images/Plus-icon.svg')%>" alt="Plus icon" />New Post
           </button>
         </section>
         <section class="cards page__section">

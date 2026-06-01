@@ -1,37 +1,37 @@
 import "./index.css";
-import { enableValidation, settings } from "./validation.js";
-import Api from "../src/utils/Api.js"; 
+import { enableValidation, settings, hideInputError, toggleButtonState } from "./utils/validation.js";
+import Api from "./utils/Api.js"; 
 
-// const initialCards = [
-//   {
-//     name: "Golden Gate Bridge",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
-//   },
-//   {
-//     name: "Val Thorens",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-//   {
-//     name: "Restaurant terrace",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-//   },
-//   {
-//     name: "An outdoor case",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-//   },
-//   {
-//     name: "A very long bridge, over the forest...",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-//   },
-//   {
-//     name: "Tunnel with morning light",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-//   },
-//   {
-//     name: "Mountain house",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-// ];
+const initialCards = [
+  {
+    name: "Golden Gate Bridge",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
+  },
+  {
+    name: "Val Thorens",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
+  },
+  {
+    name: "Restaurant terrace",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
+  },
+  {
+    name: "An outdoor case",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
+  },
+  {
+    name: "A very long bridge, over the forest...",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
+  },
+  {
+    name: "Tunnel with morning light",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
+  },
+  {
+    name: "Mountain house",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
+  },
+];
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -41,16 +41,18 @@ const api = new Api({
   }
 });
 
-api.getAppInfo()
-  .then((userData, cards) => {
-  initialCards.forEach(function (item) {
-  profileNameEl.textContent = userData.name;
-  profileDescriptionEl.textContent = userData.about;
-  const cardElement = getCardElement(item);
-  cardsList.append(cardElement);
-});
-})
-.catch(console.error); 
+
+// Example usage of getInitialCards
+api.getInitialCards()
+  .then(cards => {
+    // Render each card to the page (fall back to local initialCards if API returns empty)
+    const cardsToRender = (cards && cards.length) ? cards : initialCards;
+    cardsToRender.forEach(card => {
+      const cardElement = getCardElement(card);
+      cardsList.append(cardElement);
+    });
+  })
+  .catch(console.error);
 
 
 const editProfileBtn = document.querySelector(".profile__edit-btn");
@@ -58,6 +60,7 @@ const addCardBtn = document.querySelector(".profile__new-post-btn");
 const avatarModalBtn = document.querySelector(".profile__avatar-btn");
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
+const profileAvatarEl = document.querySelector(".profile__avatar");
 
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
@@ -205,8 +208,6 @@ editFormEl.addEventListener("submit", function (evt) {
   evt.preventDefault();
   profileNameEl.textContent = nameInputEl.value;
   profileDescriptionEl.textContent = descriptionInputEl.value;
-  profileAvatarEl.src = userData.avatar;
-  profileAvatarEl.alt = userData.name;
   api.editUserInfo({
     name: nameInputEl.value,
     about: descriptionInputEl.value
@@ -219,33 +220,28 @@ editFormEl.addEventListener("submit", function (evt) {
   .catch((err) => {
     console.error(`Error updating profile: ${err}`);
   });
-});
-  closeModal(editProfileModal);
+  });
 
 addCardFormEl.addEventListener("submit", function (evt) {
   evt.preventDefault();
+  const inputValues = {
+    name: captionInputEl.value,
+    link: linkInputEl.value,
+  };
+  addCardFormEl.reset();
+  const cardElement = getCardElement(inputValues);
+  cardsList.prepend(cardElement);
+  closeModal(addCardModal);
+});
 
 avatarModalBtn.addEventListener("click", function () {
   openModal(avatarModal);
 });
 
-avatarInput.addEventListener("submit", handleAvatarSubmit);
-});
+avatarFormEl.addEventListener("submit", handleAvatarSubmit);
 
-avatarModalBtn.addEventListener("click", function () {
+avatarModalCloseBtn.addEventListener("click", function () {
   closeModal(avatarModal);
 });
-
-const inputValues = {
-  name: captionInputEl.value,
-  link: linkInputEl.value,
-  };
-
-  addCardFormEl.reset();
-
-const cardElement = getCardElement(inputValues);
-  cardsList.prepend(cardElement);
-
-  closeModal(addCardModal);
 
 enableValidation(settings);

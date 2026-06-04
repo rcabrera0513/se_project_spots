@@ -145,7 +145,7 @@ function handleOverlayClick(evt) {
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   api.editAvatarInfo({
-    avatar: avatarInput.files[0]
+    avatar: avatarInput.value,
   })
   .then((data) => {
     profileAvatarEl.src = data.avatar;
@@ -181,10 +181,13 @@ function resetValidation(formEl) {
 editProfileBtn.addEventListener("click", function () {
   nameInputEl.value = profileNameEl.textContent;
   descriptionInputEl.value = profileDescriptionEl.textContent;
+  resetValidation(editFormEl);
   openModal(editProfileModal);
 });
 
 addCardBtn.addEventListener("click", function () {
+  addCardFormEl.reset();
+  resetValidation(addCardFormEl);
   openModal(addCardModal);
 });
 
@@ -229,12 +232,15 @@ addCardFormEl.addEventListener("submit", function (evt) {
     link: linkInputEl.value,
   };
   addCardFormEl.reset();
+  resetValidation(addCardFormEl);
   const cardElement = getCardElement(inputValues);
   cardsList.prepend(cardElement);
   closeModal(addCardModal);
 });
 
 avatarModalBtn.addEventListener("click", function () {
+  avatarFormEl.reset();
+  resetValidation(avatarFormEl);
   openModal(avatarModal);
 });
 

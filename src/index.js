@@ -1,6 +1,7 @@
 import "./index.css";
 import { enableValidation, settings, hideInputError, toggleButtonState } from "./utils/validation.js";
 import Api from "./utils/Api.js"; 
+import avatarImg from "./images/avatar.jpg";
 
 const initialCards = [
   {
@@ -41,18 +42,38 @@ const api = new Api({
   }
 });
 
+let currentUserId = null;
 
-// Example usage of getInitialCards
-api.getInitialCards()
-  .then(cards => {
-    // Render each card to the page (fall back to local initialCards if API returns empty)
-    const cardsToRender = (cards && cards.length) ? cards : initialCards;
+
+// Load initial cards and user data in parallel
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cards, userData]) => {
+    // set profile info from API
+    if (userData) {
+      currentUserId = userData._id || userData.id || null;
+      profileNameEl.textContent = userData.name;
+      profileDescriptionEl.textContent = userData.about;
+      // If the API returns a generic placeholder, prefer the local avatar image
+      const apiAvatar = userData.avatar;
+      const hasMeaningfulApiAvatar = apiAvatar && !apiAvatar.includes('avatar_placeholder');
+      profileAvatarEl.src = hasMeaningfulApiAvatar ? apiAvatar : avatarImg;
+      profileAvatarEl.alt = userData.name || profileAvatarEl.alt;
+    }
+
+    // Render local initialCards (prefer local images over server-provided cards)
+    const cardsToRender = initialCards;
     cardsToRender.forEach(card => {
       const cardElement = getCardElement(card);
       cardsList.append(cardElement);
     });
   })
-  .catch(console.error);
+  .catch((err) => {
+    console.error(err);
+    // fallback: render local cards even on error
+    initialCards.forEach(card => {
+      cardsList.append(getCardElement(card));
+    });
+  });
 
 
 const editProfileBtn = document.querySelector(".profile__edit-btn");
@@ -61,6 +82,8 @@ const avatarModalBtn = document.querySelector(".profile__avatar-btn");
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 const profileAvatarEl = document.querySelector(".profile__avatar");
+// default avatar from local asset
+profileAvatarEl.src = avatarImg;
 
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
@@ -97,18 +120,58 @@ function getCardElement(data) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
 
-  cardImageEl.src = data.link;
-  cardImageEl.alt = data.name;
+  cardImageEl.src = data.link || "src/images/State=Default.svg";
+  cardImageEl.alt = data.name || "Card image";
   cardTitleEl.textContent = data.name;
 
-const cardLikeBtnEl = cardElement.querySelector(".card__like-btn");
+  const cardLikeBtnEl = cardElement.querySelector(".card__like-btn");
+  const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
+
+  // show delete button only for cards owned by current user (when known)
+  if (data.owner) {
+    const ownerId = data.owner._id || data.owner;
+    if (currentUserId && ownerId !== currentUserId) {
+      cardDeleteBtnEl.style.display = "none";
+    }
+  }
+
+  // set initial like state if likes exist
+  if (data.likes && Array.isArray(data.likes) && currentUserId) {
+    const liked = data.likes.some((u) => u._id === currentUserId || u === currentUserId);
+    if (liked) cardLikeBtnEl.classList.add("card__like-btn_active");
+  }
+
+  // Like / Unlike behavior: call API when card has an id
   cardLikeBtnEl.addEventListener("click", () => {
-  cardLikeBtnEl.classList.toggle("card__like-btn_active");
+    // optimistic toggle
+    const wasLiked = cardLikeBtnEl.classList.contains("card__like-btn_active");
+    cardLikeBtnEl.classList.toggle("card__like-btn_active");
+
+    if (!data._id) {
+      // local-only card: nothing to sync
+      return;
+    }
+
+    // call API and rollback UI on error
+    const action = wasLiked ? api.unlikeCard(data._id) : api.likeCard(data._id);
+    action.catch((err) => {
+      console.error(`Error toggling like: ${err}`);
+      // rollback UI
+      cardLikeBtnEl.classList.toggle("card__like-btn_active");
+    });
   });
 
-const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
+  // Delete behavior: call API when card has an id; otherwise remove locally
   cardDeleteBtnEl.addEventListener("click", () => {
-  cardElement.remove();
+    if (!data._id) {
+      cardElement.remove();
+      return;
+    }
+    api.deleteCard(data._id)
+      .then(() => {
+        cardElement.remove();
+      })
+      .catch((err) => console.error(`Error deleting card: ${err}`));
   });
 
 cardImageEl.addEventListener("click", () => {
@@ -231,11 +294,17 @@ addCardFormEl.addEventListener("submit", function (evt) {
     name: captionInputEl.value,
     link: linkInputEl.value,
   };
-  addCardFormEl.reset();
-  resetValidation(addCardFormEl);
-  const cardElement = getCardElement(inputValues);
-  cardsList.prepend(cardElement);
-  closeModal(addCardModal);
+  api.addCard(inputValues)
+    .then((data) => {
+      addCardFormEl.reset();
+      resetValidation(addCardFormEl);
+      const cardElement = getCardElement(data);
+      cardsList.prepend(cardElement);
+      closeModal(addCardModal);
+    })
+    .catch((err) => {
+      console.error(`Error adding card: ${err}`);
+    });
 });
 
 avatarModalBtn.addEventListener("click", function () {

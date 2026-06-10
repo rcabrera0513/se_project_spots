@@ -154,6 +154,30 @@
   cursor: not-allowed;
 }
 
+.modal__button-container {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.modal__cancel-btn {
+  background-color: transparent;
+  color: rgb(33 33 33 / 100%);
+  border: 1px solid rgb(33 33 33 / 40%);
+  border-radius: 8px;
+  padding: 18px 32px;
+  font-family: Poppins, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.modal__cancel-btn:hover {
+  background-color: rgb(33 33 33 / 5%);
+  border-color: rgb(33 33 33 / 100%);
+}
+
 .modal__image-container {
   position: relative;
 }

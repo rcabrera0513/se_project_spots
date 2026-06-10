@@ -98,8 +98,9 @@ const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarInput = avatarFormEl.querySelector("#profile-avatar-input");
 
 const deleteConfirmModal = document.querySelector("#delete-confirm-modal");
-const deleteConfirmBtn = deleteConfirmModal.querySelector(".modal__submit-btn");
+const deleteConfirmBtn = deleteConfirmModal.querySelector(".modal__submit-btn_type_delete");
 const deleteConfirmCloseBtn = deleteConfirmModal.querySelector(".modal__close-btn");
+const deleteConfirmCancelBtn = deleteConfirmModal.querySelector(".modal__cancel-btn");
 let cardToDelete = null;
 let cardToDeleteId = null;
 
@@ -117,11 +118,16 @@ deleteConfirmBtn.addEventListener("click", () => {
     closeModal(deleteConfirmModal);
     return;
   }
+  const originalText = deleteConfirmBtn.textContent;
+  deleteConfirmBtn.textContent = "Deleting...";
+  deleteConfirmBtn.disabled = true;
 
   if (!cardToDeleteId) {
     cardToDelete.remove();
     closeModal(deleteConfirmModal);
     cardToDelete = null;
+    deleteConfirmBtn.textContent = originalText;
+    deleteConfirmBtn.disabled = false;
     return;
   }
 
@@ -132,11 +138,17 @@ deleteConfirmBtn.addEventListener("click", () => {
     })
     .catch((err) => {
       console.error(`Error deleting card: ${err}`);
+      deleteConfirmBtn.textContent = originalText;
+      deleteConfirmBtn.disabled = false;
     })
     .finally(() => {
       cardToDelete = null;
       cardToDeleteId = null;
     });
+});
+
+deleteConfirmCancelBtn.addEventListener("click", () => {
+  closeModal(deleteConfirmModal);
 });
 
 deleteConfirmCloseBtn.addEventListener("click", function () {

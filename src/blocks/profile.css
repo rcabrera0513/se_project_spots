@@ -16,6 +16,9 @@
   align-items: flex-end;
   justify-content: center;
   visibility: hidden;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .profile__avatar-container:hover .profile__avatar-btn {
@@ -30,9 +33,6 @@
   object-fit: cover;
 }
 
-.profile__avatar-btn::after {
-  content: "Edit Avatar";
-}
 
 .profile__column {
   display: flex;

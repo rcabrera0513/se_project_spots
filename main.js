@@ -3256,6 +3256,11 @@ const avatarModal = document.querySelector("#avatar-modal");
 const avatarFormEl = avatarModal.querySelector(".modal__form");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarInput = avatarFormEl.querySelector("#profile-avatar-input");
+const deleteConfirmModal = document.querySelector("#delete-confirm-modal");
+const deleteConfirmBtn = deleteConfirmModal.querySelector(".modal__submit-btn");
+const deleteConfirmCloseBtn = deleteConfirmModal.querySelector(".modal__close-btn");
+let cardToDelete = null;
+let cardToDeleteId = null;
 const addCardFormEl = addCardModal.querySelector(".modal__form");
 const captionInputEl = addCardFormEl.querySelector("#card-caption-input");
 const linkInputEl = addCardFormEl.querySelector("#card-image-input");
@@ -3263,6 +3268,38 @@ const previewModal = document.querySelector("#preview-modal");
 const previewModalCloseBtn = previewModal.querySelector(".modal__close-btn");
 const previewImageEl = previewModal.querySelector(".modal__image");
 const previewModalCaption = document.querySelector(".modal__caption");
+
+deleteConfirmBtn.addEventListener("click", () => {
+  if (!cardToDelete) {
+    closeModal(deleteConfirmModal);
+    return;
+  }
+
+  if (!cardToDeleteId) {
+    cardToDelete.remove();
+    closeModal(deleteConfirmModal);
+    cardToDelete = null;
+    return;
+  }
+
+  api.deleteCard(cardToDeleteId)
+    .then(() => {
+      cardToDelete.remove();
+      closeModal(deleteConfirmModal);
+    })
+    .catch((err) => {
+      console.error(`Error deleting card: ${err}`);
+    })
+    .finally(() => {
+      cardToDelete = null;
+      cardToDeleteId = null;
+    });
+});
+
+deleteConfirmCloseBtn.addEventListener("click", function () {
+  closeModal(deleteConfirmModal);
+});
+
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
 const cardsList = document.querySelector(".cards__list");
 function getCardElement(data) {
@@ -3274,11 +3311,23 @@ function getCardElement(data) {
   cardTitleEl.textContent = data.name;
   const cardLikeBtnEl = cardElement.querySelector(".card__like-btn");
   cardLikeBtnEl.addEventListener("click", () => {
-    cardLikeBtnEl.classList.toggle("card__like-btn_active");
+    if (!data._id) {
+      return;
+    }
+
+    const wasLiked = cardLikeBtnEl.classList.contains("card__like-btn_active");
+    const action = wasLiked ? api.unlikeCard(data._id) : api.likeCard(data._id);
+    action.then(() => {
+      cardLikeBtnEl.classList.toggle("card__like-btn_active");
+    }).catch((err) => {
+      console.error(`Error toggling like: ${err}`);
+    });
   });
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
   cardDeleteBtnEl.addEventListener("click", () => {
-    cardElement.remove();
+    cardToDelete = cardElement;
+    cardToDeleteId = data._id || null;
+    openModal(deleteConfirmModal);
   });
   cardImageEl.addEventListener("click", () => {
     previewImageEl.src = data.link;
@@ -3308,6 +3357,10 @@ function handleOverlayClick(evt) {
 }
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+  const submitButton = avatarFormEl.querySelector(".modal__submit-btn");
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Saving…";
+
   api.editAvatarInfo({
     avatar: avatarInput.files[0]
   }).then(data => {
@@ -3316,12 +3369,19 @@ function handleAvatarSubmit(evt) {
     closeModal(avatarModal);
   }).catch(err => {
     console.error(`Error updating avatar: ${err}`);
+  }).finally(() => {
+    submitButton.textContent = originalText;
   });
 }
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
   document.removeEventListener("keydown", handleEscape);
   modal.removeEventListener("mousedown", handleOverlayClick);
+
+  if (modal === deleteConfirmModal) {
+    cardToDelete = null;
+    cardToDeleteId = null;
+  }
 }
 function resetValidation(formEl) {
   const inputList = Array.from(formEl.querySelectorAll(_utils_validation_js__WEBPACK_IMPORTED_MODULE_1__.settings.inputSelector));
@@ -3354,10 +3414,10 @@ addCardCloseBtn.addEventListener("click", function () {
 });
 editFormEl.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  profileNameEl.textContent = nameInputEl.value;
-  profileDescriptionEl.textContent = descriptionInputEl.value;
-  profileAvatarEl.src = userData.avatar;
-  profileAvatarEl.alt = userData.name;
+  const submitButton = editFormEl.querySelector(".modal__submit-btn");
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Saving…";
+
   api.editUserInfo({
     name: nameInputEl.value,
     about: descriptionInputEl.value
@@ -3367,27 +3427,35 @@ editFormEl.addEventListener("submit", function (evt) {
     closeModal(editProfileModal);
   }).catch(err => {
     console.error(`Error updating profile: ${err}`);
+  }).finally(() => {
+    submitButton.textContent = originalText;
   });
 });
-closeModal(editProfileModal);
 addCardFormEl.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  avatarModalBtn.addEventListener("click", function () {
-    openModal(avatarModal);
+  const submitButton = addCardFormEl.querySelector(".modal__submit-btn");
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Saving…";
+
+  const inputValues = {
+    name: captionInputEl.value,
+    link: linkInputEl.value
+  };
+  api.addCard(inputValues).then(data => {
+    addCardFormEl.reset();
+    resetValidation(addCardFormEl);
+    const cardElement = getCardElement(data);
+    cardsList.prepend(cardElement);
+    closeModal(addCardModal);
+  }).catch(err => {
+    console.error(`Error adding card: ${err}`);
+  }).finally(() => {
+    submitButton.textContent = originalText;
   });
-  avatarInput.addEventListener("submit", handleAvatarSubmit);
 });
 avatarModalBtn.addEventListener("click", function () {
   closeModal(avatarModal);
 });
-const inputValues = {
-  name: captionInputEl.value,
-  link: linkInputEl.value
-};
-addCardFormEl.reset();
-const cardElement = getCardElement(inputValues);
-cardsList.prepend(cardElement);
-closeModal(addCardModal);
 (0,_utils_validation_js__WEBPACK_IMPORTED_MODULE_1__.enableValidation)(_utils_validation_js__WEBPACK_IMPORTED_MODULE_1__.settings);
 }();
 /******/ })()

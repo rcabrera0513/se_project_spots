@@ -66,6 +66,21 @@
   font-weight: 500;
 }
 
+.modal__text {
+  margin: 0 0 32px;
+  color: rgb(33 33 33 / 100%);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.modal__submit-btn_type_delete {
+  background-color: #d32f2f;
+}
+
+.modal__submit-btn_type_delete:hover {
+  background-color: #b71c1c;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
